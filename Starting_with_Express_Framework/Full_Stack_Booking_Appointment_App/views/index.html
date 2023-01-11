@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Appointment App</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="title">Booking Appointment App</h1>
+        <hr>
+        <form action="/" method="post">
+            <label for="username">Name:</label> <br>
+            <input type="text" id="username" name="username" required> <br>
+            <label for="email">Email:</label> <br>
+            <input type="email" id="email" name="email" required> <br>
+            <label for="phoneNumber">Phone:</label> <br>
+            <input type="number" id="phoneNumber" name="phoneNumber" required> <br>
+            <button class="btn" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="container-users">
+        <h2 class="title-users">User List</h2>
+        <hr>
+        <ul id="user-list">
+            <!-- <li>user 1</li>
+            <li>user 2</li>
+            <li>user 3</li> -->
+        </ul>
+    </div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+<script src="js/index.js"></script>
+
+</html>
