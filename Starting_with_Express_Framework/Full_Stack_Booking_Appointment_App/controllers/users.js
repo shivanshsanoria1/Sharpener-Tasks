@@ -10,15 +10,21 @@ exports.postAddUser = (req, res, next)=> {
     const username = req.body.username;
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
+    if(!username || !email || !phoneNumber){
+        throw Error('All fields are required');
+    }
     User.create({
         username: username,
         email: email,
         phoneNumber: phoneNumber
     })
-    .then((result) => {
-        res.redirect('/');
+    .then((user) => {
+        res.redirect('/users/add-user');
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+        console.log('POST ADD USER ERROR');
+        res.status(500).json({error: err});
+    });
 }
 
 exports.getAllUsers = (req, res, next)=> {
@@ -26,15 +32,21 @@ exports.getAllUsers = (req, res, next)=> {
     .then((users) => {
         res.json(users);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+        console.log('GET ALL USERS ERROR');
+        res.status(500).json({error: err});
+    });
 }
 
 exports.postDeleteUser = (req, res, next)=> {
-    const prodId = req.params.prodId;
-    User.findByPk(prodId)
+    const userId = req.params.userId;
+    User.findByPk(userId)
     .then((user) => {
         user.destroy();
-        res.redirect('/');
+        res.redirect('/users/add-user');
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+        console.log('DELETE USER ERROR');
+        res.status(500).json({error: err});;
+    });
 };

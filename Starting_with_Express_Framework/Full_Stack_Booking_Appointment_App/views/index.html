@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Appointment App</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
 
     <div class="container">
         <h1 class="title">Booking Appointment App</h1>
+        <div class="err-msg" id="err-msg"></div>
         <hr>
-        <form action="/" method="post">
+        <form id="user-form">
             <label for="username">Name:</label> <br>
             <input type="text" id="username" name="username" required> <br>
             <label for="email">Email:</label> <br>
@@ -38,6 +39,6 @@
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
-<script src="js/index.js"></script>
+<script src="../js/index.js"></script>
 
 </html>
