@@ -1,0 +1,12 @@
+.title{
+    text-align: center;
+    color: #5718ba;
+}
+
+#balance{
+    color: #00bb55;
+}
+
+.err-msg {
+    color: orangered;
+}
