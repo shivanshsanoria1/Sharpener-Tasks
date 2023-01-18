@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const expensesRoutes = require('./routes/expenses');
+const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
 
 const app = express();
@@ -12,9 +13,7 @@ app.use(bodyParser.json({ extended: false }));
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/expenses', expensesRoutes);
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'));
-})
+app.use(errorController.get404);
 
 sequelize.sync()
 .then((result) => {

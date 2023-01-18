@@ -25,6 +25,35 @@ function updateBalanceDOM(amount, mode){
     balanceDisplay.innerText = balance;
 }
 
+function deleteExpense(li){
+    const expenseId = li.id;
+    axios.post('http://localhost:' + PORT + '/expenses/delete-expense/' + expenseId)
+    .then((res) => {
+        expenseList.removeChild(li);
+        updateBalanceDOM(res.data.amount, '-');
+    })
+    .catch((err) => {
+        showError('Error: Could not Delete Expense :(');
+    });
+}
+
+function editExpense(li){
+    const expenseId = li.id;
+    axios.get('http://localhost:' + PORT + '/expenses/edit-expense/' + expenseId)
+    .then((res) => {
+        amountInput.value = res.data.amount;
+        descriptionInput.value = res.data.description;
+        categoryInput.value = res.data.category;
+        expenseList.removeChild(li);
+        updateBalanceDOM(res.data.amount, '-');
+        //update the ID to the id of the item to be updated
+        ID = expenseId;
+    })
+    .catch((err) => {
+        showError('Error: Could not get Expense details :(');
+    });
+}
+
 function showExpenseInDOM(expense){
     const li = document.createElement('li');
     li.className = 'list-group-item'
@@ -50,7 +79,7 @@ function showExpenseInDOM(expense){
     expenseList.appendChild(li);
 }
 
-function showAllExpenses(){
+function showAllExpensesInDOM(){
     axios.get('http://localhost:' + PORT + '/expenses/get-expenses')
     .then((res) => {
         const expenses = res.data;
@@ -89,35 +118,6 @@ function addExpense(ID){
     });
 }
 
-function deleteExpense(li){
-    const expenseId = li.id;
-    axios.post('http://localhost:' + PORT + '/expenses/delete-expense/' + expenseId)
-    .then((res) => {
-        expenseList.removeChild(li);
-        updateBalanceDOM(res.data.amount, '-');
-    })
-    .catch((err) => {
-        showError('Error: Could not Delete Expense :(');
-    });
-}
-
-function editExpense(li){
-    const expenseId = li.id;
-    axios.get('http://localhost:' + PORT + '/expenses/edit-expense/' + expenseId)
-    .then((res) => {
-        amountInput.value = res.data.amount;
-        descriptionInput.value = res.data.description;
-        categoryInput.value = res.data.category;
-        expenseList.removeChild(li);
-        updateBalanceDOM(res.data.amount, '-');
-        //update the ID to the id of the item to be updated
-        ID = expenseId;
-    })
-    .catch((err) => {
-        showError('Error: Could not get Expense details :(');
-    });
-}
-
 function showError(msg){
     errMsg.innerHTML = `<h4>${msg}</h4>`;
     setTimeout(() => errMsg.innerHTML = '', 3000);
@@ -128,6 +128,4 @@ form.addEventListener('submit', (e) => {
     addExpense(ID);
 });
 
-window.addEventListener('DOMContentLoaded', (e) => {
-    showAllExpenses();
-});
+window.addEventListener('DOMContentLoaded', showAllExpensesInDOM);

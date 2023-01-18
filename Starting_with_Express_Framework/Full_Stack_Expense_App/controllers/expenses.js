@@ -23,7 +23,7 @@ exports.postAddExpense = (req, res, next) => {
             category: category
         })
         .then((expense) => {
-            res.status(200).json(expense);
+            res.json(expense);
         })
         .catch((err) => {
             console.log('POST ADD EXPENSE ERROR');
@@ -36,7 +36,7 @@ exports.postAddExpense = (req, res, next) => {
             expense.description = description;
             expense.category = category
             expense.save();
-            res.status(200).json(expense);
+            res.json(expense);
         })
         .catch((err) => {
             console.log('POST EDIT EXPENSE ERROR');
@@ -58,13 +58,10 @@ exports.getAllExpenses = (req, res, next) => {
 
 exports.postDeleteExpense = (req, res, next) => {
     const expenseId = req.params.expenseId;
-    const amount = req.body.amount;
-    const description = req.body.description;
-    const category = req.body.category;
     Expense.findByPk(expenseId)
     .then((expense) => {
         expense.destroy();
-        res.status(200).json(expense);
+        res.json(expense);
     })
     .catch((err) => {
         console.log('POST DELETE EXPENSE ERROR');
