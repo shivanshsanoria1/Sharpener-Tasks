@@ -19,7 +19,7 @@ exports.postAddUser = (req, res, next)=> {
         phoneNumber: phoneNumber
     })
     .then((user) => {
-        res.redirect('/users/add-user');
+        res.json(user);
     })
     .catch((err) => {
         console.log('POST ADD USER ERROR');
@@ -43,10 +43,10 @@ exports.postDeleteUser = (req, res, next)=> {
     User.findByPk(userId)
     .then((user) => {
         user.destroy();
-        res.redirect('/users/add-user');
+        res.json(user);
     })
     .catch((err) => {
         console.log('DELETE USER ERROR');
-        res.status(500).json({error: err});;
+        res.status(500).json({error: err});
     });
 };
