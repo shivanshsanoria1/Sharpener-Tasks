@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb');
+/* const { ObjectId } = require('mongodb');
 
 const getDb = require('../util/database').getDb;
 
@@ -14,12 +14,12 @@ class User{
 		const db = getDb();
 
 		return db.collection('users').insertOne(this);
-		/* .then((result) => {
+		.then((result) => {
 			console.log(result);
 		})
 		.catch((err) => {
 			console.log(err);
-		}); */
+		});
 	}
 
 	addToCart(product){
@@ -128,3 +128,4 @@ class User{
 }
 
 module.exports = User;
+ */
