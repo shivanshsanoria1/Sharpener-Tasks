@@ -90,7 +90,7 @@ exports.postOrder = (req, res, next) => {
     .then((user) => {
         const products = user.cart.items.map((item) => {
             return {
-                product: item.productId,
+                product: { ...item.productId._doc },
                 quantity: item.quantity
             };
         });
@@ -106,6 +106,9 @@ exports.postOrder = (req, res, next) => {
         return order.save();
     })
     .then(() => {
+        req.user.clearCart();
+    })
+    .then(() => {
         res.redirect('/orders');
     })
     .catch((err) => {
@@ -114,8 +117,7 @@ exports.postOrder = (req, res, next) => {
 };
 
 exports.getOrders = (req, res, next) => {
-    req.user
-    .getOrders()
+    Order.find({ 'user.userId': req.user._id})
     .then((orders) => {
         res.render('shop/orders', {
             path: '/orders',
@@ -123,5 +125,7 @@ exports.getOrders = (req, res, next) => {
             orders: orders
         });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+        console.log(err);
+    });
 };
