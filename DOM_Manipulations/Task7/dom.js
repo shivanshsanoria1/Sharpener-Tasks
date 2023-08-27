@@ -36,7 +36,7 @@ let newDiv = document.createElement('div');
 newDiv.className = 'New-Class';
 newDiv.id = 'New-id';
 //setAttribute
-newDiv.setAttribute('New-title','New Attribute');
+newDiv.setAttribute('title','New-Attribute');
 //createTextNode
 let newDivText = document.createTextNode('Hello World!');
 //appendChild
@@ -55,5 +55,5 @@ let newLIText = document.createTextNode('Hello World');
 newLI.appendChild(newLIText);
 let ul = document.querySelector('#items');
 let li1 = ul.firstElementChild;
-ul.insertBefore(newLI,li1);
+ul.insertBefore(newLI,li1); //insert newLI before li1
 console.log(newLI);

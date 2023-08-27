@@ -1,5 +1,5 @@
 //crudcrud.com endpoint (which can be modified)
-const crudcrudEndpoint = "a6113d10c6db4c7aa60662e3945c3c4a";
+const crudcrudEndpoint = "b1d2124f6c564e4f93dafe7a314f2eaa";
 
 //grab from elements from the html file
 const form = document.getElementById('my-form');
